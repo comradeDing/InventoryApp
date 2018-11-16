@@ -66,6 +66,7 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\RackListView.cs" />
+    <Compile Include="Views\StartupView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -109,7 +110,12 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\PsWebServiceLib\PsWebServiceLib\PsWebServiceLib.csproj">
+      <Project>{73c16a60-abe4-4032-8f3d-6b8c00b7bef9}</Project>
+      <Name>PsWebServiceLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\main_view.axml">
       <SubType>Designer</SubType>
@@ -117,6 +123,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\rackList_view.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\startup_view.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

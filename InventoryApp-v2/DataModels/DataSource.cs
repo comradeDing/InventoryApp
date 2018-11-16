@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,11 +19,16 @@ using File = System.IO.File;
 
 namespace InventoryApp_v2.DataModels
 {
-    public class DataSource
+    public static class DataSource
     {
+#if !DEBUG
         private const string _webApiUri = "http://mfg-fs:5482/InventoryService/";
-        private const string _serializedFileName = "lastMasterList.json";
-        private readonly Dictionary<string, string> _commands = new Dictionary<string, string>()
+#else
+        private const string _webApiUri = "http://edingeldein:5482/InventoryService/";
+#endif
+        private const string _serializedFileName = "masterSaved.json";
+        private const string _cachedMasterList = "masterCache.json";
+        private static readonly Dictionary<string, string> _commands = new Dictionary<string, string>()
         {
             { "PingSource", "PingDevice" },
             { "GetMasterList", "/GetData/RackSummary"},
@@ -30,7 +36,7 @@ namespace InventoryApp_v2.DataModels
             { "PostSummary", "/PostData/summary.json" }
         };
 
-        public async Task<bool> PingSource()
+        public static async Task<bool> PingSource()
         {
             try
             {
@@ -58,7 +64,23 @@ namespace InventoryApp_v2.DataModels
             }
         }
 
-        public async Task<string> GetMasterListFromWeb()
+        public static async Task<bool> CacheMasterList()
+        {
+            try
+            {
+                var masterList = await GetMasterListFromWeb();
+                await WriteMasterListToDisk(masterList, true);
+            }
+            catch (Exception e)
+            {
+                Log.Error("InventoryApp.DataSource", "Error caching master list: " + e.Message);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static async Task<string> GetMasterListFromWeb()
         {
             var request = WebRequest.Create(_webApiUri + _commands["GetMasterList"]) as HttpWebRequest;
             request.Method = "GET";
@@ -81,10 +103,10 @@ namespace InventoryApp_v2.DataModels
             }
         }
 
-        public async Task<string> GetMasterListFromDisk()
+        public static async Task<string> GetMasterListFromDisk(bool isCache)
         {
             var baseDir = Application.Context.FilesDir.AbsolutePath;
-            var filePath = Path.Combine(baseDir, _serializedFileName);
+            var filePath = Path.Combine(baseDir, (isCache) ? _cachedMasterList : _serializedFileName);
 
             try
             {
@@ -99,11 +121,11 @@ namespace InventoryApp_v2.DataModels
 
         }
 
-        public async Task WriteMasterListToDisk(string serializedMasterList)
+        public static async Task WriteMasterListToDisk(string serializedMasterList, bool isCache)
         {
             var baseDir = Application.Context.FilesDir.AbsolutePath;
-            var savePath = Path.Combine(baseDir, _serializedFileName);
-
+            var savePath = Path.Combine(baseDir, (isCache) ? _cachedMasterList : _serializedFileName);
+            Log.Debug("InventoryApp.DataSource", "Master list file path: " + savePath);
             try
             {
                 var writeFile = Task.Run(() => File.WriteAllText(savePath, serializedMasterList));
