@@ -37,8 +37,11 @@ namespace InventoryApp_v2.Views
             Task.Run(() =>
             {
                 while (!_loadingComplete) ;
-                LaunchApplication();
-                Finish();
+                RunOnUiThread(() =>
+                {
+                    LaunchApplication();
+                    Finish();
+                });
             });
         }
 

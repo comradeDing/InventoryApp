@@ -99,7 +99,7 @@ namespace InventoryApp_v2.DataModels
             catch (Exception e)
             {
                 Log.Error("InventoryApp.DataSource", "Error getting master list:\t" + e.Message);
-                return null;
+                throw e;
             }
         }
 
