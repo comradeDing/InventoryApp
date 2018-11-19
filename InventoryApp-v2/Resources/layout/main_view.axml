@@ -17,12 +17,12 @@
 		android:text="New Session"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/btn_loadSession" />
+		android:id="@+id/NewSession" />
 	<Button
 		android:text="Load Session"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/btn_newSession" />
+		android:id="@+id/LoadSession" />
 	<TextView
 		android:text="No previous session found."
 		android:textAppearance="?android:attr/textAppearanceMedium"

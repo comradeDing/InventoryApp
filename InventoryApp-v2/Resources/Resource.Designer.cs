@@ -2339,8 +2339,14 @@ namespace InventoryApp_v2
 			// aapt resource value: 0x7f0800b0
 			public const int LL_loadingLayout = 2131230896;
 			
+			// aapt resource value: 0x7f08009b
+			public const int LoadSession = 2131230875;
+			
 			// aapt resource value: 0x7f080035
 			public const int META = 2131230773;
+			
+			// aapt resource value: 0x7f08009a
+			public const int NewSession = 2131230874;
 			
 			// aapt resource value: 0x7f080036
 			public const int SHIFT = 2131230774;
@@ -2437,12 +2443,6 @@ namespace InventoryApp_v2
 			
 			// aapt resource value: 0x7f08003d
 			public const int bottom = 2131230781;
-			
-			// aapt resource value: 0x7f08009a
-			public const int btn_loadSession = 2131230874;
-			
-			// aapt resource value: 0x7f08009b
-			public const int btn_newSession = 2131230875;
 			
 			// aapt resource value: 0x7f080063
 			public const int buttonPanel = 2131230819;
