@@ -61,12 +61,17 @@
     <Compile Include="DataModels\ApplicationData.cs" />
     <Compile Include="DataModels\DataSource.cs" />
     <Compile Include="DataModels\SessionController.cs" />
+    <Compile Include="GroupByRack.cs" />
+    <Compile Include="ViewModels\EditRackViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RackListViewModel.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="Views\EditRackView.cs" />
     <Compile Include="Views\MainView.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\RackListView.cs" />
+    <Compile Include="Views\ReportView.cs" />
     <Compile Include="Views\StartupView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +134,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\startup_view.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\editRack_view.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\report_view.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
